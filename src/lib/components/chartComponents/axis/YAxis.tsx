@@ -75,7 +75,7 @@ class YAxis extends Component<YAxisComponentProps> {
   getTime(value) {
     const hours = Math.floor(value / 60)
     const minutes = Math.round(value % 60)
-    return `${hours > 0 ? `${hours}h` : ''}${hours > 0 && minutes > 0 ? ' ' : ''}${minutes > 0 ? `${minutes}m` : ''}`
+    return `${hours > 0 ? `${hours}h` : ''}${hours > 0 && minutes > 0 ? ' ' : ''}${minutes > 0 ? `${minutes}m` : '0m'}`
   }
 
   render() {
