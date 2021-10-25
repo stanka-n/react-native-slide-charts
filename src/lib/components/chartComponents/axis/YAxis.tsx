@@ -72,6 +72,12 @@ class YAxis extends Component<YAxisComponentProps> {
     return false
   }
 
+  getTime(value) {
+    const hours = Math.floor(value / 60)
+    const minutes = Math.round(value % 60)
+    return `${hours > 0 ? `${hours}h` : ''}${hours > 0 && minutes > 0 ? ' ' : ''}${minutes > 0 ? `${minutes}m` : ''}`
+  }
+
   render() {
     const {
       data,
@@ -109,6 +115,7 @@ class YAxis extends Component<YAxisComponentProps> {
       paddingLeft,
       paddingRight,
       paddingTop,
+      type
     } = this.props
 
     const lines: JSX.Element[] = []
@@ -153,7 +160,9 @@ class YAxis extends Component<YAxisComponentProps> {
               'middle',
             key: `${i}-text`,
             labelStyle: axisMarkerStyle,
-            label: yRange[0] + (i * tickInterval)
+            label: type ? 
+            type == 'h' ? this.getTime(yRange[0] + (i * tickInterval)) : `${Math.round(yRange[0] + (i * tickInterval) * 10) / 10} ${type}`
+            : Math.round(yRange[0] + (i * tickInterval) * 10) / 10
           }))
         }
       }

@@ -25,6 +25,7 @@ export type ToolTipProps = ToolTipPartialProps & {
   displayTriangle?: boolean
   lockTriangleCenter?: boolean
   displayToolTip?: boolean
+  fillColor: string
 }
 
 export type ToolTipDefaultProps = {
@@ -38,6 +39,7 @@ export type ToolTipDefaultProps = {
   displayTriangle: boolean
   lockTriangleCenter: boolean
   displayToolTip: boolean
+  fillColor: string
 }
 
 export type ToolTipComponentProps = ToolTipDefaultProps & ToolTipPartialProps

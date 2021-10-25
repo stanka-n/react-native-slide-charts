@@ -69,6 +69,7 @@ class SlideBarChart extends Component<SlideBarChartComponentProps, State> {
     getDataMin(this.props.data),
     getDataMax(this.props.data)
   ]
+  shouldHideTooltip = false
 
   state: State = {
     x: new Animated.Value(0) as ExtendedAnimatedValue,
@@ -276,13 +277,16 @@ class SlideBarChart extends Component<SlideBarChartComponentProps, State> {
   }
 
   moveCursorBinaryCore(value: number, isTouch: boolean) {
+    if(this.shouldHideTooltip) {
+      return
+    }
     if (!this.mounted) {
       this.mounted = true
 
-      if (isAndroid()) {
-        this.next = undefined
-        return
-      }
+      // if (isAndroid()) {
+      //   this.next = undefined
+      //   return
+      // }
     }
     const {
       data,
@@ -521,6 +525,7 @@ class SlideBarChart extends Component<SlideBarChartComponentProps, State> {
       getDataMin(nextProps.data || []),
       getDataMax(nextProps.data || [])
     ]
+    this.shouldHideTooltip = nextProps.data !== this.props.data;
     return true
   }
 
@@ -697,6 +702,7 @@ class SlideBarChart extends Component<SlideBarChartComponentProps, State> {
         />
         {!onPress && <ToolTip
           ref={this.toolTip}
+          fillColor={fillColor}
           {...toolTipProps}
         />}
         {this.renderTouchable()}

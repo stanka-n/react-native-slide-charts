@@ -26,6 +26,7 @@ type YAxisPartialProps = {
   showAverageLine?: boolean
   markAverageLine?: boolean
   hideMarkers?: boolean
+  type?: string
 }
 
 export type YAxisProps = YAxisPartialProps & {

@@ -111,23 +111,26 @@ class ToolTip extends Component<ToolTipComponentProps, State> {
         textStyles[i].fontSize : fontSize
       const height = baseHeight ? baseHeight + 5 : 22
       inputs.push(
-        <TextInput
-          scrollEnabled={false}
-          numberOfLines={1}
-          key={`input-${i}`}
-          ref={this.textInputs[i]}
-          editable={false}
-          allowFontScaling={false}
-          multiline
-          style={[
-            styles.headerText,
-            { fontSize },
-            width ? { width } : null,
-            textStyles[i],
-            styles.textCentering,
-            isAndroid() ? { height, paddingTop: 0, paddingBottom: 0 } : null,
-          ]}
-        />
+        <View style={styles.row}>
+          {i === 0 && <View style={[styles.circle, { backgroundColor: this.props.fillColor }]} />}
+          <TextInput
+            scrollEnabled={false}
+            numberOfLines={1}
+            key={`input-${i}`}
+            ref={this.textInputs[i]}
+            editable={false}
+            allowFontScaling={false}
+            multiline
+            style={[
+              styles.headerText,
+              { fontSize },
+              width ? { width } : null,
+              textStyles[i],
+              styles.textCentering,
+              isAndroid() ? { height, paddingTop: 0, paddingBottom: 0 } : null,
+            ]}
+          />
+        </View>
       )
     }
     return inputs.reverse().map(input => input)
@@ -262,6 +265,16 @@ const styles = StyleSheet.create({
   },
   textCentering: {
     paddingTop: 2
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  circle: {
+    width: 11,
+    height: 11,
+    borderRadius: 5.5,
+    marginRight: 10
   }
 })
 

@@ -42,13 +42,14 @@ class BarChart extends Component<BarChartProps, State> {
     scaleY: ScaleLinear<number, number>,
     item: { x: number | Date, y: number }
   ) => {
+    const curveSize = widthOfBar >= 14 ? 10 : 5;
     return {
       flatBar: `M ${barStartX} ${bottomOfBar}
         L ${barStartX + widthOfBar} ${bottomOfBar}
         L ${barStartX + widthOfBar} ${bottomOfBar}
         L ${barStartX} ${bottomOfBar}`,
       bar: `M ${barStartX} ${scaleY(item.y)}
-        L ${barStartX + widthOfBar} ${scaleY(item.y)}
+        C ${barStartX} ${scaleY(item.y) - curveSize} ${barStartX + widthOfBar} ${scaleY(item.y) - curveSize} ${barStartX + widthOfBar} ${scaleY(item.y)}
         L ${barStartX + widthOfBar} ${bottomOfBar}
         L ${barStartX} ${bottomOfBar}`
     }
@@ -177,7 +178,7 @@ class BarChart extends Component<BarChartProps, State> {
       paddingLeft,
       paddingRight,
       paddingTop,
-      paddingBottom,
+      paddingBottom
     } = this.props
 
     const { data } = animated ? this.state : this.props
