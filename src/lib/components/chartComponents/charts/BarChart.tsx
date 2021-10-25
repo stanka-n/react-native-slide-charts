@@ -48,8 +48,8 @@ class BarChart extends Component<BarChartProps, State> {
         L ${barStartX + widthOfBar} ${bottomOfBar}
         L ${barStartX + widthOfBar} ${bottomOfBar}
         L ${barStartX} ${bottomOfBar}`,
-      bar: `M ${barStartX} ${scaleY(item.y)}
-        C ${barStartX} ${scaleY(item.y) - curveSize} ${barStartX + widthOfBar} ${scaleY(item.y) - curveSize} ${barStartX + widthOfBar} ${scaleY(item.y)}
+      bar: `M ${barStartX} ${item.y > 0 ? scaleY(item.y) : bottomOfBar}
+        ${item.y > 0 ? `C ${barStartX} ${scaleY(item.y) - curveSize} ${barStartX + widthOfBar} ${scaleY(item.y) - curveSize} ${barStartX + widthOfBar} ${scaleY(item.y)}` : `L ${barStartX + widthOfBar} ${bottomOfBar}`}
         L ${barStartX + widthOfBar} ${bottomOfBar}
         L ${barStartX} ${bottomOfBar}`
     }
