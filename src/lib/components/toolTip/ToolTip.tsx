@@ -111,12 +111,11 @@ class ToolTip extends Component<ToolTipComponentProps, State> {
         textStyles[i].fontSize : fontSize
       const height = baseHeight ? baseHeight + 5 : 22
       inputs.push(
-        <View style={styles.row}>
+        <View key={`input-${i}`} style={styles.row}>
           {i === 0 && <View style={[styles.circle, { backgroundColor: this.props.fillColor }]} />}
           <TextInput
             scrollEnabled={false}
             numberOfLines={1}
-            key={`input-${i}`}
             ref={this.textInputs[i]}
             editable={false}
             allowFontScaling={false}
